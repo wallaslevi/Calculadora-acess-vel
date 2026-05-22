@@ -1,0 +1,6 @@
+{
+  "name": "Calculadora Acessível LPS v1.0",
+  "description": "Calculadora acessível com perfis de variabilidade: Padrão, Voz Ativa (leitura em pt-BR) e Alto Contraste (fontes gigantes e cores de alta visibilidade).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
