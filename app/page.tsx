@@ -5,17 +5,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Volume2, 
   Eye, 
-  HelpCircle, 
-  Copy, 
-  Check, 
-  Download, 
-  Sparkles, 
   History, 
   Trash2, 
   Keyboard, 
-  Layers, 
-  CheckCircle2,
-  FileCode,
   Smartphone
 } from 'lucide-react';
 
@@ -50,7 +42,6 @@ export default function AccessibilityCalculatorPage() {
   const [shouldResetInput, setShouldResetInput] = useState<boolean>(false);
   const [activeProfile, setActiveProfile] = useState<'standard' | 'vocal' | 'contrast'>('standard');
   const [calculatedHistory, setCalculatedHistory] = useState<string[]>([]);
-  const [copiedCode, setCopiedCode] = useState<boolean>(false);
   const [lastKeyPressed, setLastKeyPressed] = useState<string | null>(null);
 
   // Client-side initialization guard (deferred to comply with ESLint set-state-in-effect rules)
@@ -866,10 +857,10 @@ export default function AccessibilityCalculatorPage() {
   };
 
   return (
-    <div className={`min-h-screen ${activeProfile === 'contrast' ? 'bg-zinc-950 text-white' : 'bg-slate-100 text-slate-800'} transition-all duration-200 font-sans flex flex-col md:flex-row pb-6 md:pb-0`}>
+    <div className={`min-h-screen ${activeProfile === 'contrast' ? 'bg-zinc-950 text-white' : 'bg-slate-100 text-slate-800'} transition-all duration-200 font-sans flex flex-col items-center justify-center p-4`}>
       
       {/* 1. Left Section: Real Live Interactive Calculator Applet */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-md flex flex-col items-center justify-center">
         
         {/* Profile Branding Header */}
         <div className="w-full max-w-md mb-4 flex items-center justify-between">
@@ -1251,119 +1242,6 @@ export default function AccessibilityCalculatorPage() {
           <p className="mt-1">
             • Ações: <code className="px-1 rounded bg-slate-200 text-slate-700 font-mono font-bold mx-0.5">Enter</code> ou <code className="px-1 rounded bg-slate-200 text-slate-700 font-mono font-bold mx-0.5">=</code> para resultado | <code className="px-1 rounded bg-slate-200 text-slate-700 font-mono font-bold mx-0.5">Esc</code> para Limpar | <code className="px-1 rounded bg-slate-200 text-slate-700 font-mono font-bold mx-0.5">Backspace</code> para Apagar
           </p>
-        </div>
-      </div>
-
-      {/* 2. Right Section: Standalone Single-File index.html Exporter Panel */}
-      <div className={`w-full md:w-[420px] lg:w-[460px] border-t md:border-t-0 md:border-l p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${
-        activeProfile === 'contrast' ? 'bg-zinc-950 border-yellow-400' : 'bg-white border-slate-200'
-      }`}>
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <div className={`p-2 rounded-xl ${activeProfile === 'contrast' ? 'bg-yellow-400 text-black' : 'bg-amber-100 text-amber-800'}`}>
-              <FileCode className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block">Deploy Vercel</span>
-              <h2 className={`text-lg font-extrabold ${activeProfile === 'contrast' ? 'text-yellow-400' : 'text-slate-800'}`}>
-                Expansão de Código Único
-              </h2>
-            </div>
-          </div>
-
-          <p className={`text-xs leading-relaxed ${activeProfile === 'contrast' ? 'text-zinc-300 font-semibold' : 'text-slate-500'}`}>
-            O usuário solicitou explicitamente a entrega de um **único arquivo <code className="px-1 bg-slate-100 text-rose-500 rounded font-mono text-[11px]">index.html</code> autocontido** que funcione de forma interativa com as mesmas regras de variabilidade de acessibilidade.
-          </p>
-
-          <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-3 ${
-            activeProfile === 'contrast' ? 'bg-black border-yellow-500' : 'bg-slate-50 border-slate-100'
-          }`}>
-            <span className={`font-bold block ${activeProfile === 'contrast' ? 'text-yellow-400' : 'text-slate-700'}`}>
-              📦 Benefícios do Código Único:
-            </span>
-            <ul className="space-y-2 text-slate-500 block list-disc pl-4">
-              <li>Usa <strong className={activeProfile === 'contrast' ? 'text-yellow-300' : 'text-slate-700'}>Tailwind CSS</strong> e Javascript ES6 nativo.</li>
-              <li>Aplica recursos de síntese de voz em português nativo de forma reativa.</li>
-              <li>Arquitetura limpa para publicação instantânea na Vercel, Netlify ou Github Pages.</li>
-              <li>Salvo em <code className="font-mono text-amber-600 bg-amber-50 px-1 py-0.5 rounded">/public/index.html</code> pronto para acesso estático.</li>
-            </ul>
-          </div>
-
-          {/* Source Code Micro Viewer */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className={`text-[11px] font-bold uppercase tracking-wider ${activeProfile === 'contrast' ? 'text-yellow-400' : 'text-slate-400'}`}>
-                Visualização do index.html
-              </span>
-              <span className="text-[10px] font-mono text-slate-400">
-                ~ 530 linhas de código
-              </span>
-            </div>
-            <div className={`rounded-xl p-3 h-36 font-mono text-[10px] overflow-y-auto border border-dashed select-all transition-all ${
-              activeProfile === 'contrast'
-                ? 'bg-black text-yellow-400/90 border-yellow-500'
-                : 'bg-slate-900 text-slate-300 border-slate-800'
-            }`}>
-              {`<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Acessível LPS v1.0</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Perfil Padrão, Voz Ativa (PT-BR Synthesis), Alto Contraste -->
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    button:focus-visible { outline: 4px solid #facc15; }
-  </style>
-</head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-between">
-  <!-- Interactive Keypad, Speech controls & Variabilities -->
-  <script>
-    // Javascript completo autocontido com TTS pt-BR
-  </script>
-</body>
-</html>`}
-            </div>
-          </div>
-        </div>
-
-        {/* Exporter Buttons */}
-        <div className="space-y-2 mt-6">
-          <button
-            onClick={copyHTMLToClipboard}
-            className={`w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all focus:outline-none ${
-              activeProfile === 'contrast'
-                ? 'bg-yellow-400 hover:bg-yellow-300 text-black border-2 border-black font-black'
-                : copiedCode
-                ? 'bg-emerald-600 text-white'
-                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-md'
-            }`}
-          >
-            {copiedCode ? (
-              <>
-                <CheckCircle2 className="w-4 h-4 animate-bounce" />
-                <span>Copiado com sucesso!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4" />
-                <span>Copiar Código do index.html</span>
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={downloadHTMLFile}
-            className={`w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all border focus:outline-none ${
-              activeProfile === 'contrast'
-                ? 'bg-black hover:bg-zinc-900 text-yellow-400 border-2 border-yellow-400 font-extrabold'
-                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 shadow-sm'
-            }`}
-          >
-            <Download className="w-4 h-4" />
-            <span>Baixar Arquivo index.html</span>
-          </button>
         </div>
       </div>
     </div>
